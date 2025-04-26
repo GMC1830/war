@@ -12,7 +12,7 @@ php8.2-sodium php8.2-exif wget nano
 
 systemctl enable --now httpd2 mysqld mariadb
 
-wget https://raw.githubusercontent.com/kraz69/shishiga66/refs/heads/main/md2/moodle/1.sh
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m2/moodle/1.sh
 
 chmod +x ./1.sh
 
@@ -24,8 +24,7 @@ chmod +x ./2.sh
 
 ./2.sh
 
-wget https://raw.githubusercontent.com/kraz69/shishiga66/refs/heads/main/md2/moodle/3.sh
-
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m2/moodle/3.sh
 chmod +x ./3.sh
 
 ./3.sh
