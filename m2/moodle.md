@@ -25,6 +25,7 @@ chmod +x ./2.sh
 ./2.sh
 
 wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m2/moodle/3.sh
+
 chmod +x ./3.sh
 
 ./3.sh
