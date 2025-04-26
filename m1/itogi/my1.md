@@ -155,9 +155,14 @@ hostnamectl set-hostname hq-cli.au-team.irpo; exec bash
 
 systemctl restart network
 
-тут важно , проверить ip -c a , адресс выданный с dhcp ,
+### проверить
 
-смеряем его в hq-srv по пути /etc/dnsmasq.conf
+тут важно , 
+проверить КОМАНДОЙ  ip -c a  адресс выданный с dhcp ,
+
+если  конец 11 , то совпадет не меняем , если нет то
+
+меняем его в hq-srv по пути /etc/dnsmasq.conf
 
 в строке с  "host-record=hq-cli.au-team.irpo,192.168.2.11"
 
