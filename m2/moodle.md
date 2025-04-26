@@ -18,7 +18,7 @@ chmod +x ./1.sh
 
 ./1.sh
 
-wget https://raw.githubusercontent.com/kraz69/shishiga66/refs/heads/main/md2/moodle/2.sh
+wget https://github.com/GMC1830/war/blob/main/m2/moodle/2.sh
 
 chmod +x ./2.sh
 
