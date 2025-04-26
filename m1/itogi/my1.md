@@ -124,6 +124,7 @@ apt-get update
 apt-get install -y wget
 
 wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m1/machine/hq-r66.sh
+
 chmod +x ./hq-r66.sh
 
 ./hq-r66.sh
