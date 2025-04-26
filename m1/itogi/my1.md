@@ -12,7 +12,7 @@ apt-get update
 
 apt-get install -y wget
 
-wget https://raw.githubusercontent.com/kraz69/shishiga66/refs/heads/main/i66.sh
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m1/machine/i66.sh
 
 chmod +x ./i66.sh
 
@@ -96,19 +96,19 @@ apt-get update
 
 apt-get install -y wget
 
-wget https://raw.githubusercontent.com/kraz69/shishiga66/refs/heads/main/hqsrv66DNS.sh
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m1/machine/hqsrv66DNS.sh
 
 chmod +x ./hqsrv66DNS.sh
 
 ./hqsrv66DNS.sh
 
-wget https://raw.githubusercontent.com/kraz69/shishiga66/refs/heads/main/srv66.sh
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m1/machine/srv66.sh
 
 chmod +x ./srv66.sh
 
 ./srv66.sh
 
-wget https://raw.githubusercontent.com/kraz69/shishiga66/refs/heads/main/sshdd66srv.sh
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m1/machine/sshdd66srv.sh
 
 chmod +x ./sshdd66srv.sh
 
@@ -123,15 +123,14 @@ apt-get update
 
 apt-get install -y wget
 
-wget https://raw.githubusercontent.com/kraz69/shishiga66/refs/heads/main/hq-r66.sh
-
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m1/machine/hq-r66.sh
 chmod +x ./hq-r66.sh
 
 ./hq-r66.sh
 
 echo -e "search au-team.irpo \nnameserver 192.168.1.10" > /etc/resolv.conf
 
-wget https://raw.githubusercontent.com/kraz69/shishiga66/refs/heads/main/rtr66.sh
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m1/machine/rtr66.sh
 
 chmod +x ./rtr66.sh
 
@@ -139,7 +138,7 @@ chmod +x ./rtr66.sh
 
 echo -e "search au-team.irpo \nnameserver 192.168.1.10" > /etc/resolv.conf
 
-wget https://raw.githubusercontent.com/kraz69/shishiga66/refs/heads/main/os66.sh
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m1/machine/os66.sh
 
 chmod +x ./os66.sh
 
@@ -197,19 +196,19 @@ apt-get update
 
 apt-get install -y wget 
 
-wget https://raw.githubusercontent.com/kraz69/shishiga66/refs/heads/main/b_rt69.sh
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m1/machine/b_rt69.sh
 
 chmod +x ./b_rt69.sh
 
 ./b_rt69.sh
 
-wget https://raw.githubusercontent.com/kraz69/shishiga66/refs/heads/main/rtr66.sh
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m1/machine/rtr66.sh
 
 chmod +x ./rtr66.sh
 
 ./rtr66.sh
 
-wget https://raw.githubusercontent.com/kraz69/shishiga66/refs/heads/main/osbbr66.sh
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m1/machine/osbbr66.sh
 
 chmod +x ./osbbr66.sh
 
@@ -239,7 +238,7 @@ apt-get update
 
 apt-get install -y wget
 
-wget https://raw.githubusercontent.com/kraz69/shishiga66/refs/heads/main/srv66.sh
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m1/machine/srv66.sh
 
 chmod +x ./srv66.sh
 
@@ -248,7 +247,7 @@ chmod +x ./srv66.sh
 echo -e "search au-team.irpo \nnameserver 192.168.1.10" > /etc/resolv.conf
 
 
-wget https://raw.githubusercontent.com/kraz69/shishiga66/refs/heads/main/sshdd66srv.sh
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m1/machine/sshdd66srv.sh
 
 chmod +x ./sshdd66srv.sh
 
