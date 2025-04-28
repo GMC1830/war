@@ -136,12 +136,12 @@ br-srv
 mcedit 11.sh
 
 
-https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m2/samba/11.sh
+https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m2/samba/12.sh
 
 
 
-chmod +x ./11.sh
+chmod +x ./12.sh
 
-./11.sh
+./12.sh
 
 
