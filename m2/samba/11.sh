@@ -9,23 +9,28 @@ if [[ ! -f "$CSV_FILE" ]]; then
     exit 1
 fi
 
-# Чтение CSV-файла
+# Чтение CSV-файла и обработка данных
 while IFS=";" read -r firstName lastName role phone ou street zip city country password; do
     # Пропуск заголовка
     if [[ "$firstName" == "First Name" ]]; then
         continue
     fi
 
-    # Формирование имени пользователя
-    username="${firstName,,}.${lastName,,}"
+    # Формирование имени пользователя в нижнем регистре
+    username="${firstName,,} ${lastName,,}"
 
-    # Добавление пользователя с использованием samba-tool
-    if samba-tool user add "$username" "$password"; then
-        echo "Пользователь $username успешно создан!"
+    # Проверка, существует ли пользователь
+    if samba-tool user show "$username" &> /dev/null; then
+        echo "Пользователь $username уже существует. Пропуск."
+        continue
+    fi
+
+    # Добавление пользователя с заданным паролем из CSV
+    if sudo samba-tool user add "$username" "$password"; then
+        echo "Пользователь $username успешно создан с паролем $password!"
     else
         echo "Не удалось создать пользователя $username. Проверьте ошибки."
     fi
-
 done < "$CSV_FILE"
 
 echo "Импорт пользователей завершен."
