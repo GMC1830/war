@@ -118,31 +118,6 @@ chmod +x ./1.br-srv.sh
 
 ./1.br-srv.sh
 
-/////////////////////////////////////////
-
-если не подкл ansible то
-
-исправляем порт на машине при помощи
-
-
-systemctl enable --now sshd
-
-sed -i 's/^#*[[:space:]]*Port[[:space:]]\+.*/Port 2024/' /etc/openssh/sshd_config
-
-systemctl restart  sshd
-
-чтобы заново выдать ключ >
-
-
-ssh-copy-id -i /root/.ssh/id_rsa.pub -p 2024 sshuser@192.168.1.10
-
-ssh-copy-id -i /root/.ssh/id_rsa.pub user@192.168.2.10
-
-ssh-copy-id -i /root/.ssh/id_rsa.pub net_admin@172.16.4.4
-
-ssh-copy-id -i /root/.ssh/id_rsa.pub net_admin@172.16.5.5
-
-
 
 -----------------------------------------------------------------------------------------
 
