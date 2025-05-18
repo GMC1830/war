@@ -113,7 +113,7 @@ if ! dpkg -l | grep -q apache2; then
     systemctl enable --now httpd2.service mysqld.service
     
 
-      Запуск mysql_secure_installation с помощью expect
+    # Запуск mysql_secure_installation с помощью expect
     echo "Запуск mysql_secure_installation..."
 
     # Убедитесь, что expect установлен
@@ -122,26 +122,26 @@ if ! dpkg -l | grep -q apache2; then
     fi
 
     # Скрипт expect для автоматизации mysql_secure_installation
-    expect -c "
-    spawn mysql_secure_installation
-    expect "Enter current password for root (enter for none):"
-    send "\r"
-    expect "Set root password?"
-    send "y\r"
-    expect "New password:"
-    send "P@ssw0rd\r"
-    expect "Re-enter new password:"
-    send "P@ssw0rd\r"
-    expect "Remove anonymous users?"
-    send "y\r"
-    expect "Disallow root login remotely?"
-    send "y\r"
-    expect "Remove test database and access to it?"
-    send "y\r"
-    expect "Reload privilege tables now?"
-    send "y\r"
-    expect eof
-    "
+    /usr/bin/expect <<EOF
+spawn mysql_secure_installation
+expect "Enter current password for root (enter for none):"
+send "\r"
+expect "Set root password?"
+send "y\r"
+expect "New password:"
+send "P@ssw0rd\r"
+expect "Re-enter new password:"
+send "P@ssw0rd\r"
+expect "Remove anonymous users?"
+send "y\r"
+expect "Disallow root login remotely?"
+send "y\r"
+expect "Remove test database and access to it?"
+send "y\r"
+expect "Reload privilege tables now?"
+send "y\r"
+expect eof
+EOF
     
     # Настройка базы данных Moodle, если база данных еще не создана
     if ! mysql -u root -p'P@ssw0rd' -e "USE moodledb"; then
