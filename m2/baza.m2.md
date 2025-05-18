@@ -76,6 +76,38 @@ chmod +x ./3.sh
 
 пароль P@ssw0rd
 
+## HQ-CLI
+
+epm update
+
+epm -y install yandex-browser-stable &
+
+apt-get update && apt-get install -y chrony
+
+cat <<'EOF' > /etc/chrony.conf
+
+server 192.168.2.1 iburst
+
+driftfile /var/lib/chrony/drift
+
+makestep 1.0 3
+
+rtcsync
+
+logdir /var/log/chrony
+
+EOF
+
+systemctl enable --now chronyd
+
+chronyc burst 4/10
+
+system-auth write ad au-team.irpo hq-cli AU-TEAM 'administrator' 'P@ssw0rd'
+
+sleep 5
+
+reboot
+
 ## BR-SRV
 
 apt-get update && apt-get install -y wget
