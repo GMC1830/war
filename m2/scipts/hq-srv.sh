@@ -108,25 +108,40 @@ if ! dpkg -l | grep -q apache2; then
         apache2-mod_php8.2 php8.2-gd php8.2-curl php8.2-intl 
         php8.2-mysqli php8.2-xml php8.2-xmlrpc php8.2-zip 
         php8.2-soap php8.2-mbstring php8.2-opcache php8.2-json 
-        php8.2-ldap php8.2-xmlreader php8.2-fileinfo php8.2-sodium unzip 
+        php8.2-ldap php8.2-xmlreader php8.2-fileinfo php8.2-sodium unzip expect
     
     systemctl enable --now httpd2.service mysqld.service
     
 
-    # Запуск mysql_secure_installation и ожидание ввода от пользователя
-
+      Запуск mysql_secure_installation с помощью expect
     echo "Запуск mysql_secure_installation..."
 
-    mysql_secure_installation <<EOF
+    # Убедитесь, что expect установлен
+    if ! dpkg -l | grep -q expect; then
+        apt-get install -y expect
+    fi
 
-y
-P@ssw0rd
-P@ssw0rd
-y
-y
-y
-y
-EOF
+    # Скрипт expect для автоматизации mysql_secure_installation
+    expect -c "
+    spawn mysql_secure_installation
+    expect "Enter current password for root (enter for none):"
+    send "\r"
+    expect "Set root password?"
+    send "y\r"
+    expect "New password:"
+    send "P@ssw0rd\r"
+    expect "Re-enter new password:"
+    send "P@ssw0rd\r"
+    expect "Remove anonymous users?"
+    send "y\r"
+    expect "Disallow root login remotely?"
+    send "y\r"
+    expect "Remove test database and access to it?"
+    send "y\r"
+    expect "Reload privilege tables now?"
+    send "y\r"
+    expect eof
+    "
     
     # Настройка базы данных Moodle, если база данных еще не создана
     if ! mysql -u root -p'P@ssw0rd' -e "USE moodledb"; then
