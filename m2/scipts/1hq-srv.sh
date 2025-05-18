@@ -117,7 +117,16 @@ if ! dpkg -l | grep -q apache2; then
 
     echo "Запуск mysql_secure_installation... Пожалуйста, следуйте инструкциям."
 
-    mysql_secure_installation
+    mysql_secure_installation <<EOF
+
+y
+P@ssw0rd
+P@ssw0rd
+y
+y
+y
+y
+EOF
     
     # Настройка базы данных Moodle, если база данных еще не создана
     if ! mysql -u root -p'P@ssw0rd' -e "USE moodledb"; then
