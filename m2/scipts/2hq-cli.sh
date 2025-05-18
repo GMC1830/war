@@ -1,15 +1,24 @@
 #!/bin/bash
 
-control sudo public
+# Создание конфигурации sudoers для группы hq
 cat <<'EOF' > /etc/sudoers.d/hq
 %hq ALL=(ALL) NOPASSWD:/bin/cat, /bin/grep, /usr/bin/id
 EOF
+
+# Установка прав на файл sudoers
 chmod 0400 /etc/sudoers.d/hq
+
+# Проверка синтаксиса sudoers
 visudo -c
-su - user1.hq
+
+# Переход к пользователю user1.hq
+su - user1.hq << 'EOF'
 sudo id
 sudo ls /root
 exit
+EOF
+
+# Создание пользователей и их домашних каталогов
 bash << 'EOF'
 USERS_TO_CREATE='
 lucian.buck
@@ -316,20 +325,28 @@ karly.curry
 BASE_HOMEDIR="/home/AU-TEAM.IRPO"
 DOMAIN_REALM="au-team.irpo"
 SKEL_DIR="/etc/skel"
+
+# Создание базового каталога для пользователей
 mkdir -p "${BASE_HOMEDIR}" && chmod 755 "${BASE_HOMEDIR}" || { echo "Ошибка создания базового каталога"; exit 1; }
+
 echo ">>> Создание дополнительных домашних каталогов..."
 echo "${USERS_TO_CREATE}" | while IFS= read -r user_name_mixed_case; do
   user_name_mixed_case=$(echo "${user_name_mixed_case}" | tr -d '\r')
   [[ -z "${user_name_mixed_case// }" ]] && continue
+  
   lower_user_name=$(echo "${user_name_mixed_case}" | tr '[:upper:]' '[:lower:]')
   full_user_name="${user_name_mixed_case}@${DOMAIN_REALM}"
   user_home_dir="${BASE_HOMEDIR}/${lower_user_name}"
+  
   echo -n "Обработка ${full_user_name}... "
+  
   user_uid=$(id -u "${full_user_name}" 2>/dev/null)
   user_gid=$(id -g "${full_user_name}" 2>/dev/null)
+  
   if [ -n "$user_uid" ] && [ -n "$user_gid" ]; then
     if [ ! -d "${user_home_dir}" ]; then
         install -d -o "${user_uid}" -g "${user_gid}" -m 700 "${user_home_dir}" || { echo "Ошибка install."; continue; }
+        
         if [ $? -eq 0 ]; then # Проверяем код возврата install
             cp -aT "${SKEL_DIR}/" "${user_home_dir}/" && chown -R "${user_uid}:${user_gid}" "${user_home_dir}" && echo "Готово." || echo "Ошибка копирования/прав."
         fi
@@ -340,13 +357,23 @@ echo "${USERS_TO_CREATE}" | while IFS= read -r user_name_mixed_case; do
     echo "Ошибка: Не удалось получить UID/GID для '${full_user_name}'."
   fi
 done
+
 echo "<<< Создание дополнительных домашних каталогов завершено."
 exit 0
 EOF
+
+# Настройка NFS монтирования 
 mkdir /mnt/nfs
+
 cat <<EOF >> /etc/fstab
 192.168.1.10:/raid5/nfs /mnt/nfs nfs intr,soft,_netdev,x-systemd.automount 0 0
 EOF
+
 systemctl daemon-reload
+
+# Монтирование всех файловых систем из fstab 
 mount -a
+
+# Проверка содержимого смонтированного NFS 
 ls /mnt/nfs
+
