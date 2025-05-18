@@ -9,10 +9,8 @@ handle_error() {
 }
 trap 'handle_error $LINENO' ERR
 
-# Обновление пакетов и установка chrony
+# Установка и настройка chrony
 apt-get update && apt-get install -y chrony || { echo "Ошибка установки chrony"; exit 1; }
-
-# Конфигурация chrony
 cat <<'EOF' > /etc/chrony.conf
 server 192.168.5.1 iburst
 driftfile /var/lib/chrony/drift
@@ -31,7 +29,7 @@ apt-get install -y samba samba-client task-samba-dc || { echo "Ошибка ус
 mv /etc/samba/smb.conf /etc/samba/smb.conf.bak || { echo "Ошибка резервного копирования smb.conf"; exit 1; }
 
 # Настройка Samba Domain Controller
-samba-tool domain provision --realm=AU-TEAM.IRPO --domain=AU-TEAM --server-role=dc --dns-backend=SAMBA_INTERNAL --use-rfc2307 --adminpass='P@ssw0rd' || { echo "Ошибка настройки Samba DC"; exit 1; }
+samba-tool domain provision --realm=AU-TEAM.IRPO --domain=AU-TEAM --server-role=dc --dns-backend=SAMBA_INTERNAL --use-rfc2307 --adminpass='P@ssw0rd' --option="dns forwarder = 192.168.1.10" || { echo "Ошибка настройки Samba DC"; exit 1; }
 
 cp -f /var/lib/samba/private/krb5.conf /etc/krb5.conf || { echo "Ошибка копирования krb5.conf"; exit 1; }
 
@@ -95,81 +93,3 @@ echo "<<< Импорт пользователей завершён."
 EOF
 
 chmod +x /root/samba_user_add.sh || { echo "Ошибка установки прав на samba_user_add.sh"; exit 1; }
-#/root/samba_user_add.sh
-
-# Настройка SSH
-
-sed -i 's/^#*[[:space:]]*Port[[:space:]]+.*/Port 2024/' /etc/openssh/sshd_config || { echo "Ошибка изменения порта SSH"; exit 1; }
-systemctl restart sshd || { echo "Ошибка перезапуска sshd"; exit 1; }
-
-# Установка Ansible
-apt-get update && apt-get install -y ansible || { echo "Ошибка установки Ansible"; exit 1; }
-
-# Генерация SSH ключей и копирование их на удаленные серверы
-ssh-keygen -t rsa -f /root/.ssh/id_rsa -N "" || echo "Ключ уже существует."
-ssh-copy-id -i /root/.ssh/id_rsa.pub -p 2024 sshuser@192.168.1.10 || { echo "Ошибка копирования SSH ключа на 192.168.1.10"; exit 1; }
-ssh-copy-id -i /root/.ssh/id_rsa.pub user@192.168.2.10 || { echo "Ошибка копирования SSH ключа на 192.168.2.10"; exit 1; }
-ssh-copy-id -i /root/.ssh/id_rsa.pub net_admin@172.16.4.4 || { echo "Ошибка копирования SSH ключа на 172.16.4.4"; exit 1; }
-ssh-copy-id -i /root/.ssh/id_rsa.pub net_admin@172.16.5.5 || { echo "Ошибка копирования SSH ключа на 172.16.5.5"; exit 1; }
-
-# Настройка Ansible
-mkdir -p /etc/ansible || { echo "Ошибка создания директории Ansible"; exit 1; }
-cat <<'EOF' > /etc/ansible/hosts
-[hq]
-192.168.1.10 ansible_user=sshuser ansible_port=2024
-192.168.2.10 ansible_user=user
-172.16.4.4 ansible_user=net_admin
-
-[br]
-172.16.5.5 ansible_user=net_admin
-192.168.3.10 ansible_user=sshuser ansible_port=2024
-EOF
-
-cat <<'EOF' > /etc/ansible/ansible.cfg
-[defaults]
-inventory      = /etc/ansible/hosts
-host_key_checking = False
-interpreter_python = auto_silent
-EOF
-
-echo "Скрипт выполнен успешно."
-
-apt-get update && apt-get install -y docker-engine docker-compose
-systemctl enable --now docker
-docker volume create dbvolume
-cat << 'EOF' > /home/sshuser/wiki.yml
-version: '3.7'
-services:
-  mediawiki:
-    container_name: wiki
-    image: mediawiki
-    restart: always
-    ports:
-      - "8080:80"
-    links:
-      - mariadb:mariadb
-    volumes:
-      - images:/var/www/html/images
-      # - ./LocalSettings.php:/var/www/html/LocalSettings.php
-    depends_on:
-      - mariadb
-  mariadb:
-    container_name: mariadb
-    image: mariadb
-    restart: always
-    environment:
-      MYSQL_DATABASE: mediawiki
-      MYSQL_USER: wiki
-      MYSQL_PASSWORD: WikiP@ssword
-      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-    volumes:
-      - dbvolume:/var/lib/mysql
-volumes:
-  images: {}
-  dbvolume:
-    external: true
-EOF
-chown sshuser:sshuser /home/sshuser/wiki.yml
-systemctl stop docker && sleep 5 && systemctl start docker && sleep 10
-docker compose -f /home/sshuser/wiki.yml up -d
-
