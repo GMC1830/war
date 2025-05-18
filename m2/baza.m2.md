@@ -78,12 +78,6 @@ chmod +x ./3.sh
 
 ## HQ-CLI
 
-systemctl enable --now sshd
-
-sed -i 's/^#*[[:space:]]*Port[[:space:]]\+.*/Port 2024/' /etc/openssh/sshd_config
-
-systemctl restart  sshd
-
 epm update
 
 epm -y install yandex-browser-stable &
