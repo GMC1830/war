@@ -1,3 +1,5 @@
+#!/bin/bash
+
 control sudo public
 cat <<'EOF' > /etc/sudoers.d/hq
 %hq ALL=(ALL) NOPASSWD:/bin/cat, /bin/grep, /usr/bin/id
