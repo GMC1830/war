@@ -258,3 +258,10 @@ wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m1/machine/ss
 chmod +x ./sshdd66srv.sh
 
 ./sshdd66srv.sh
+
+
+//чистим следы
+
+rm -f NAMEFILE.SH
+
+history -c
