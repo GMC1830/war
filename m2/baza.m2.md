@@ -120,9 +120,9 @@ apt-get update && apt-get install -y wget
 
 wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m2/scipts/1.br-srv.sh
 
-chmod +x ./1br-srv.sh
+chmod +x ./1.br-srv.sh
 
-./1br-srv.sh
+./1.br-srv.sh
 
 -----------------------------------------------------------------------------------------
 
