@@ -115,7 +115,7 @@ if ! dpkg -l | grep -q apache2; then
 
     # Запуск mysql_secure_installation и ожидание ввода от пользователя
 
-    echo "Запуск mysql_secure_installation... Пожалуйста, следуйте инструкциям."
+    echo "Запуск mysql_secure_installation..."
 
     mysql_secure_installation <<EOF
 
