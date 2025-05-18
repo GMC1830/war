@@ -108,7 +108,7 @@ if ! dpkg -l | grep -q apache2; then
         apache2-mod_php8.2 php8.2-gd php8.2-curl php8.2-intl 
         php8.2-mysqli php8.2-xml php8.2-xmlrpc php8.2-zip 
         php8.2-soap php8.2-mbstring php8.2-opcache php8.2-json 
-        php8.2-ldap php8.2-xmlreader php8.2-fileinfo php8.2-sodium unzip expect
+        php8.2-ldap php8.2-xmlreader php8.2-fileinfo php8.2-sodium unzip 
     
     systemctl enable --now httpd2.service mysqld.service
     
