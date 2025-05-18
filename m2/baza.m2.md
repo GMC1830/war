@@ -176,5 +176,13 @@ docker compose -f /home/sshuser/wiki.yml stop
 docker compose -f /home/sshuser/wiki.yml up -d
 
 
+## HQ-CLI
+
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m2/scipts/2hq-cli.sh
+
+chmod +x ./2hq-cli.sh
+
+./2hq-cli.sh
+
 
 
