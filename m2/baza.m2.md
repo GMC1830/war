@@ -133,6 +133,41 @@ chmod +x ./medwiki.sh
 ./medwiki.sh
 
 
+> hq-cli  192.168.3.10:8080
+
+
+Тип базы данных: MariaDB
+
+Хост базы данных: mariadb 
+
+(имя сервиса Docker).
+
+Имя базы данных: mediawiki 
+
+Пользователь базы данных: wiki 
+
+Пароль пользователя базы данных: WikiP@ssword
+
+Установите флажок "Использовать ту же учётную запись, что и для установки".
+
+Нажмите "Continue".
+
+Название и учётная запись:
+
+Название вики: Wiki 
+
+Имя пользователя (администратора): wikiadmin.
+
+Пароль: WikiP@ssword.
+
+Адрес email: admin@example.com 
+
+Выберите "Хватит уже, просто установите вики".
+
+scp -P 2024 /home/user/Downloads/LocalSettings.php sshuser@192.168.3.10:/home/sshuser/
+
+
+## BR-SRV
 
 sed -i 's/^\([[:space:]]*\)# - \(\.\/LocalSettings\.php:.*\)$/\1- \2/' /home/sshuser/wiki.yml
 
