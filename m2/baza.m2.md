@@ -67,3 +67,32 @@ chmod +x ./3.sh
 -----------------------------------------------------------------------------------------
 
 На hq-cli переходим по 192.168.1.10/moodle/install.php
+
+тип бд maria
+
+название бд moodledb
+
+пользователь moodle
+
+пароль P@ssw0rd
+
+## BR-SRV
+
+apt-get update && apt-get install -y wget
+
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m2/scipts/1br-srv.sh
+
+chmod +x ./1br-srv.sh
+
+./1br-srv.sh
+
+
+sed -i 's/^\([[:space:]]*\)# - \(\.\/LocalSettings\.php:.*\)$/\1- \2/' /home/sshuser/wiki.yml
+
+docker compose -f /home/sshuser/wiki.yml stop
+
+docker compose -f /home/sshuser/wiki.yml up -d
+
+
+
+
