@@ -80,11 +80,20 @@ chmod +x ./3.sh
 
 apt-get update && apt-get install -y wget
 
-wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m2/scipts/1br-srv.sh
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m2/scipts/1.br-srv.sh
 
 chmod +x ./1br-srv.sh
 
 ./1br-srv.sh
+
+-----------------------------------------------------------------------------------------
+
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m2/scipts/medwiki.sh
+
+chmod +x ./medwiki.sh
+
+./medwiki.sh
+
 
 
 sed -i 's/^\([[:space:]]*\)# - \(\.\/LocalSettings\.php:.*\)$/\1- \2/' /home/sshuser/wiki.yml
