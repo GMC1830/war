@@ -1,4 +1,4 @@
-# war
+# 1 module
 
 login password > root toor
 
@@ -6,7 +6,9 @@ login password > user resu
 
 ## ISP
 
+
   перезапустили поосле настрройки isp reboot , а то что то не применяется, хз
+
 
 apt-get update
 
@@ -17,6 +19,10 @@ wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m1/machine/i6
 chmod +x ./i66.sh
 
 ./i66.sh
+
+
+reboot
+
 
 ## HQ-rtr
 
@@ -157,10 +163,14 @@ systemctl restart network
 
 ### проверить
 
-тут важно , 
-проверить КОМАНДОЙ  ip -c a  адресс выданный с dhcp ,
+тут важно ,  
 
-если  конец 11 , то совпадет не меняем , если нет то
+проверить КОМАНДОЙ  ip -c a 
+
+адресс выданный с dhcp , если  192.168.2.11 , и  совпадет не меняем , 
+
+
+если нет то
 
 меняем его в hq-srv по пути /etc/dnsmasq.conf
 
