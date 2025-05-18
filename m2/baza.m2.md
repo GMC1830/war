@@ -22,8 +22,9 @@ chmod +x ./1br-rtr.sh
 
 apt-get update && apt-get install -y wget
 
-wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m2/scipts/1hq-srv.sh
+wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m2/scipts/hq-srv.sh
 
-chmod +x ./1hq-srv.sh
+chmod +x ./hq-srv.sh
 
-./1hq-srv.sh
+./hq-srv.sh
+
