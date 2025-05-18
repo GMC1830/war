@@ -28,11 +28,8 @@ chmod +x ./hq-srv.sh
 
 ./hq-srv.sh
 
-Moodle
+## Moodle
 
-На hq-srv устанавливаем сервис с бд (moodle + mariabd)
-
-apt-get update
 
 apt-get install -y apache2 php8.2 apache2-mod_php8.2 mariadb-server
 php8.2-opcache php8.2-curl php8.2-gd php8.2-intl php8.2-mysqli
