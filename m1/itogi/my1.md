@@ -262,6 +262,8 @@ chmod +x ./sshdd66srv.sh
 
 //чистим следы
 
+ls
+
 rm -f NAMEFILE.SH
 
 history -c
