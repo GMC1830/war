@@ -93,7 +93,12 @@ fi
 
 # Изменение порта SSH, 
 
-sed -i 's/^#*[[:space:]]*Port[[:space:]]+.*/Port 2024/' /etc/openssh/sshd_config 
+sudo sed -i '/^#*Port / s/[0-9]\+/2024/' /etc/openssh/sshd_config
+
+echo "Port 2024" | sudo tee -a /etc/openssh/sshd_config
 
 systemctl restart sshd
+
+
+
 
