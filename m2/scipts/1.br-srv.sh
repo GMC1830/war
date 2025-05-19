@@ -81,7 +81,7 @@ chmod +x /root/samba_user_add.sh
 /root/samba_user_add.sh
 
 # Настройка SSH
-sed -i 's/^#*[[:space:]]*Port[[:space:]]+.*/Port 2024/' /etc/ssh/sshd_config
+sed -i 's/^#*[[:space:]]*Port[[:space:]]+.*/Port 2024/' /etc/openssh/sshd_config 
 systemctl restart sshd
 
 # Установка Ansible
