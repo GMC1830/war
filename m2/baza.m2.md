@@ -78,6 +78,8 @@ chmod +x ./3.sh
 
 ## HQ-CLI
 
+systemctl start --now sshd
+
 systemctl restart sshd
 
 epm update
