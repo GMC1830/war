@@ -86,32 +86,6 @@ epm update
 
 epm -y install yandex-browser-stable &
 
-apt-get update && apt-get install -y chrony
-
-cat <<'EOF' > /etc/chrony.conf
-
-server 192.168.2.1 iburst
-
-driftfile /var/lib/chrony/drift
-
-makestep 1.0 3
-
-rtcsync
-
-logdir /var/log/chrony
-
-EOF
-
-systemctl enable --now chronyd
-
-chronyc burst 4/10
-
-system-auth write ad au-team.irpo hq-cli AU-TEAM 'administrator' 'P@ssw0rd'
-
-sleep 5
-
-reboot
-
 ## BR-SRV
 
 apt-get update && apt-get install -y wget
@@ -175,6 +149,36 @@ docker compose -f /home/sshuser/wiki.yml up -d
 
 
 ## HQ-CLI
+
+apt-get update && apt-get install -y chrony
+
+cat <<'EOF' > /etc/chrony.conf
+
+server 192.168.2.1 iburst
+
+driftfile /var/lib/chrony/drift
+
+makestep 1.0 3
+
+rtcsync
+
+logdir /var/log/chrony
+
+EOF
+
+systemctl enable --now chronyd
+
+chronyc burst 4/10
+
+system-auth write ad au-team.irpo hq-cli AU-TEAM 'administrator' 'P@ssw0rd'
+
+sleep 5
+
+.........................................
+
+reboot
+
+.........................................
 
 wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m2/scipts/2hq-cli.sh
 
