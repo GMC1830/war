@@ -120,15 +120,6 @@ chmod +x ./1.br-srv.sh
 
 ./1.br-srv.sh
 
-
-# Изменение порта SSH, 
-
-sed -i 's/^#*[[:space:]]*Port[[:space:]]+.*/Port 2024/' /etc/openssh/sshd_config 
-
-systemctl restart sshd
-
-
-
 -----------------------------------------------------------------------------------------
 
 wget https://raw.githubusercontent.com/GMC1830/war/refs/heads/main/m2/scipts/medwiki.sh
