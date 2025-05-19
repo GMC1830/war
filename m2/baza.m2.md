@@ -28,13 +28,6 @@ chmod +x ./hq-srv.sh
 
 ./hq-srv.sh
 
-# Изменение порта SSH, 
-
-sed -i 's/^#*[[:space:]]*Port[[:space:]]+.*/Port 2024/' /etc/openssh/sshd_config 
-
-systemctl restart sshd
-
-
 >> for Moodle >> on hq-srv
 
 apt-get install -y apache2 php8.2 apache2-mod_php8.2 mariadb-server
@@ -84,6 +77,8 @@ chmod +x ./3.sh
 пароль P@ssw0rd
 
 ## HQ-CLI
+
+systemctl restart sshd
 
 epm update
 
