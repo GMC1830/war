@@ -97,6 +97,7 @@ ssh-copy-id -i /root/.ssh/id_rsa.pub -p 2024 sshuser@192.168.1.10
 ssh-copy-id -i /root/.ssh/id_rsa.pub user@192.168.2.10
 ssh-copy-id -i /root/.ssh/id_rsa.pub net_admin@172.16.4.4
 ssh-copy-id -i /root/.ssh/id_rsa.pub net_admin@172.16.5.5
+ssh-copy-id -i /root/.ssh/id_rsa.pub -p 2024 sshuser@192.168.3.10
 
 # Настройка Ansible инвентаря и конфигурации
 mkdir -p /etc/ansible
