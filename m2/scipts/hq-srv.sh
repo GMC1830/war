@@ -91,14 +91,9 @@ EOF
     fi
 fi
 
-# Изменение порта SSH, если это еще не сделано
-if ! grep -q '^Port[[:space:]]*2024' /etc/openssh/sshd_config; then
-    read -p "Порт SSH не изменен на 2024. Изменить? (y/n): " change_ssh_port
-    if [[ "$change_ssh_port" == "y" ]]; then
-        sed -i 's/^#*[[:space:]]*Port[[:space:]]+.*/Port 2024/' /etc/openssh/sshd_config
-        systemctl restart sshd
-    else
-        echo "Изменение порта SSH отменено."
-    fi
-fi
+# Изменение порта SSH, 
+
+sed -i 's/^#*[[:space:]]*Port[[:space:]]+.*/Port 2024/' /etc/openssh/sshd_config 
+
+systemctl restart sshd
 
